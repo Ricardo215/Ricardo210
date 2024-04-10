@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Idiomas</title>
+    <link rel="icon" href="Salle.png" type="image/x-icon">
+
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url('Naturaleza.jpg');
+        background-size: cover; /* Ajuste para que la imagen cubra todo el área visible */
+        background-position: center;
+        color: white; /* Color de texto predeterminado */
+    }
+    
+    header {
+        text-align: center;
+        padding: 20px;
+        color: black;
+    }
+    
+    h1 {
+        color: #007bff;
+        font-size: 2rem;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centrar elementos horizontalmente */
+        justify-content: center; /* Centrar elementos verticalmente */
+        height: 100vh;
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px; /* Espacio entre los botones y el título */
+    }
+    
+    .button {
+        padding: 20px 40px; /* Reducir el tamaño de los botones */
+        margin: 10px;
+        background-color: #02c5cc;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+        border: none; /* Eliminar el borde de los botones */
+        cursor: pointer; /* Cambiar el cursor al pasar sobre los botones */
+    }
+    
+    .button img {
+        width: 30px; /* Establecer un tamaño fijo para las imágenes de las banderas */
+        vertical-align: middle; /* Alinear verticalmente las imágenes con el texto */
+        margin-right: 5px; /* Espacio entre la imagen y el texto */
+    }
+    
+    .button:hover {
+        background-color: #0056b3;
+    }   
+
+    #welcome-paragraph {
+        text-align: center; /* Centrar el texto */
+        margin-top: 10px; /* Espacio superior */
+        font-style: normal; /* Quitar la cursiva */
+    }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcome-heading">Welcome</h1>
+        <p id="welcome-paragraph">Discover new adventures around the globe.</p>
+        <div class="button-container">
+            <button id="btn1" class="button"><img src="ReinoUnido.png" alt="UK Flag"> English</button>
+            <button id="btn2" class="button"><img src="China.png" alt="China Flag"> 中國</button>
+            <button id="btn3" class="button"><img src="Arabia.png" alt="Arabia Flag"> العربية</button>
+            <button id="btn4" class="button"><img src="España.jpeg" alt="Spain Flag"> Español</button>
+            <button id="btn5" class="button"><img src="India.png" alt="Indu Flag"> हिंदी</button>
+        </div>
+    </div>
+
+
+ <script>
+// Función para cambiar el idioma
+function changeLanguage(language, data) {
+    document.getElementById('welcome-heading').textContent = data[language].heading;
+    document.getElementById('welcome-paragraph').textContent = data[language].paragraph;
+}
+
+fetch('idiomas.json')
+    .then(response => response.json())
+    .then(data => {
+        // Asignar eventos a los botones después de cargar los datos
+        document.getElementById('btn1').addEventListener('click', function() {
+            changeLanguage('en', data);
+        });
+        document.getElementById('btn2').addEventListener('click', function() {
+            changeLanguage('zh', data);
+        });
+        document.getElementById('btn3').addEventListener('click', function() {
+            changeLanguage('ar', data);
+        });
+        document.getElementById('btn4').addEventListener('click', function() {
+            changeLanguage('es', data);
+        });
+        document.getElementById('btn5').addEventListener('click', function() {
+            changeLanguage('hi', data);
+        });
+    })
+    .catch(error => console.error('Error loading language data:', error));
+ </script>
+</body>
+</html>
